@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Language Lab proposals</title><meta name="description" content="Proposed Language Lab updates for Spanish and French faculty."><meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#002147;--blue:#005fa3;--gold:#7a5d14;--gold-bar:#b8952a;--ink:#0d1525;--muted:#4a5f75;--bg:#f7f9fc;--card:#fff;--line:#d5e0ee;--chip:#fdf6e3;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--navy:#cfe0f5;--blue:#8cc4f2;--gold:#e2c26a;--gold-bar:#b8952a;--ink:#e6ecf4;--muted:#a9b7c8;--bg:#0f1724;--card:#17223a;--line:#2b3a55;--chip:#2a2414;}}
+:root[data-theme="dark"]{--navy:#cfe0f5;--blue:#8cc4f2;--gold:#e2c26a;--gold-bar:#b8952a;--ink:#e6ecf4;--muted:#a9b7c8;--bg:#0f1724;--card:#17223a;--line:#2b3a55;--chip:#2a2414;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.02rem/1.6 'DM Sans',system-ui,sans-serif;}
+main{max-width:980px;margin:0 auto;padding:40px 16px 64px;}
+.kicker{font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 6px;}
+h1{font-family:'Fraunces',Georgia,serif;font-weight:900;color:var(--navy);font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.15;margin:0 0 12px;}
+h2{font-family:'Fraunces',Georgia,serif;font-weight:700;color:var(--navy);font-size:1.45rem;margin:44px 0 14px;}
+.lead{font-size:1.15rem;color:var(--muted);max-width:760px;margin:0;}
+.bar{width:64px;height:4px;background:var(--gold-bar);border-radius:2px;margin:18px 0 0;}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}
+.card{background:var(--card);border:1px solid var(--line);border-top:5px solid var(--navy);border-radius:14px;padding:20px 20px 22px;display:flex;flex-direction:column;gap:6px;}
+.card h2,.card h3{margin:0;font-family:'Fraunces',Georgia,serif;font-size:1.5rem;color:var(--navy);}
+.card .sub{margin:0;color:var(--muted);font-weight:600;}
+.card p{margin:0;}
+.btn{display:inline-block;margin-top:12px;align-self:flex-start;background:var(--navy);color:var(--bg);text-decoration:none;font-weight:700;padding:10px 18px;border-radius:999px;}
+.btn:hover,.btn:focus-visible{background:var(--blue);}
+.btn:focus-visible{outline:3px solid var(--gold-bar);outline-offset:2px;}
+.hint{font-size:.92rem;color:var(--muted);}
+ol.changes{list-style:none;counter-reset:c;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+ol.changes li{counter-increment:c;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px 14px 56px;position:relative;}
+ol.changes li::before{content:counter(c);position:absolute;left:16px;top:13px;width:28px;height:28px;border-radius:50%;background:var(--chip);color:var(--gold);font-weight:700;display:grid;place-items:center;font-size:.95rem;}
+ol.changes b{display:block;color:var(--navy);margin-bottom:2px;}
+ul.plain{margin:0;padding-left:20px;} ul.plain li{margin:0 0 6px;}
+.ask{background:var(--chip);border-left:4px solid var(--gold-bar);border-radius:0 12px 12px 0;padding:18px 22px;}
+.ask ol{margin:8px 0 0;padding-left:22px;} .ask li{margin:0 0 8px;}
+.ask p{margin:0;}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none;}
+.how li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;}
+.how b{color:var(--navy);}
+footer{margin-top:48px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);padding-top:16px;}
+a{color:var(--blue);}
+@media (max-width:760px){.cards,ol.changes,.how{grid-template-columns:minmax(0,1fr);}}
+</style></head>
+<body><main>
+<p class="kicker">UNG Language Lab</p>
+<h1>Language Lab proposals</h1>
+<p class="lead">Proposed updates to the language labs, for faculty review. Pick your language.</p><div class="bar" aria-hidden="true"></div>
+<div class="cards" style="margin-top:28px">
+<article class="card"><h2>Spanish</h2><p class="sub">SPAN 1001 · SPAN 1002</p><p>One LAB folder, a week-one setup check, a 5:00 PM due time and one speaking rubric.</p><a class="btn" href="spanish/">Open the Spanish proposal</a></article>
+<article class="card"><h2>French</h2><p class="sub">FREN 1001 · FREN 1002</p><p>One LAB folder, a week-one setup check, French typing help, and fixes where the pages disagreed.</p><a class="btn" href="french/">Open the French proposal</a></article>
+</div>
+<footer>UNG Language Lab · Questions: reply to the email this link came in, or write to <a href="mailto:languagelab-gvl@ung.edu">languagelab-gvl@ung.edu</a>. This is a proposal: nothing changes in your course until it's agreed.</footer>
+</main></body></html>
