@@ -11,7 +11,7 @@ The late-lab policy is left out (it goes to faculty separately).
    the questions for faculty, and a card per course that opens the full proposal.
 Public site: no names, rosters, grades or schedules. The only address is the Lab's shared inbox.
 """
-import html, os, shutil, subprocess, sys
+import html, json, os, shutil, subprocess, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -110,20 +110,52 @@ ul.plain{margin:0;padding-left:20px;} ul.plain li{margin:0 0 6px;}
 footer{margin-top:48px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);padding-top:16px;}
 a{color:var(--blue);}
 @media (max-width:760px){.cards,ol.changes,.how{grid-template-columns:minmax(0,1fr);}}
+/* console shell (2026-11-10), same as the proposals */
+.shell{display:grid;grid-template-columns:252px minmax(0,1fr);min-height:100vh;}
+.rail{background:var(--card);border-right:1px solid var(--line);padding:20px 12px;display:flex;flex-direction:column;gap:14px;position:sticky;top:0;height:100vh;overflow:auto;}
+.brand{padding:0 8px;} .brand small{display:block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+.brand b{display:block;font:900 1.55rem/1.15 'Fraunces',Georgia,serif;color:var(--navy);margin:2px 0 0;} .brand span{display:block;font-size:.9rem;color:var(--muted);}
+.coursenav{display:flex;flex-wrap:wrap;gap:4px;padding:0 8px;}
+.coursenav a{font-size:.85rem;font-weight:700;text-decoration:none;color:var(--navy);border:1px solid var(--line);border-radius:999px;padding:3px 10px;}
+.coursenav a[aria-current="page"]{background:var(--navy);border-color:var(--navy);color:var(--bg);}
+.rail .grp{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:12px 8px 4px;}
+.rail .item{display:block;padding:7px 10px;border-radius:8px;text-decoration:none;color:var(--ink);font-size:.97rem;line-height:1.3;}
+.rail .item span{display:block;font-size:.82rem;color:var(--muted);} .rail .item:hover{background:var(--chip);}
+.rail-foot{margin-top:auto;padding:0 8px;font-size:.82rem;line-height:1.45;color:var(--muted);}
+.pmain{padding:26px clamp(16px,3vw,44px) 56px;min-width:0;} .pmain h2{scroll-margin-top:16px;} .pmain h2:first-of-type{margin-top:32px;}
+.pmain .cards{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));} .pmain ol.changes{grid-template-columns:repeat(auto-fill,minmax(340px,1fr));}
+@media (max-width:820px){.shell{grid-template-columns:minmax(0,1fr);} .rail{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);} .rail nav[aria-label="On this page"],.rail-foot{display:none;} .pmain{padding:18px 16px 48px;}}
 """
 
-def page(title, body, desc):
+def page(title, body, desc, rail=""):
+    if rail:
+        body = f'<div class="shell"><aside class="rail">{rail}</aside><div class="pmain">{body}' + FOOT + "</div></div>"
+    else:
+        body = f"<main>{body}{FOOT}</main>"
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(title)}</title><meta name="description" content="{e(desc)}"><meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>{CSS}</style></head>
-<body><main>
+<body>
 {body}
-<footer>UNG Language Lab · Questions: reply to the email this link came in, or write to <a href="mailto:languagelab-gvl@ung.edu">languagelab-gvl@ung.edu</a>. This is a proposal: nothing changes in your course until it's agreed.</footer>
-</main></body></html>
+</body></html>
 """
+
+FOOT = """<footer>UNG Language Lab · Questions: reply to the email this link came in, or write to <a href="mailto:languagelab-gvl@ung.edu">languagelab-gvl@ung.edu</a>. This is a proposal: nothing changes in your course until it's agreed.</footer>"""
+
+SECTIONS = [("changes", "What changes"), ("same", "What stays the same"), ("ask", "What we'd like from you"), ("how", "How to review")]
+
+def lang_rail(S):
+    """Same rail as the proposals (lab-builder/make_proposal.py shell): brand, course switch, sections."""
+    courses = '<a href="./" aria-current="page">Summary</a>' + "".join(f'<a href="{c}.html">{e(l)}</a>' for c, l, _, _ in S["cards"])
+    secs = "".join(f'<a class="item" href="#{i}">{t}</a>' for i, t in SECTIONS)
+    props = "".join(f'<a class="item" href="{c}.html">{e(l)} <span>{e(n)}</span></a>' for c, l, n, _ in S["cards"])
+    return f"""<div class="brand"><small>Language Lab proposal</small><b>{S['lang']}</b><span>For {S['lang']} faculty</span></div>
+<nav class="coursenav" aria-label="Pages in this proposal">{courses}</nav>
+<nav aria-label="On this page"><div class="grp">Summary</div>{secs}<div class="grp">Full proposals</div>{props}</nav>
+<p class="rail-foot">A proposal for faculty review: nothing changes in your course until it's agreed.</p>"""
 
 def lang_page(key, S):
     cards = "".join(f"""<article class="card"><h3>{code_l}</h3><p class="sub">{e(name)}</p><p>{blurb}</p>
@@ -132,17 +164,17 @@ def lang_page(key, S):
 <h1>{e(S['title'])}</h1>
 <p class="lead">{S['lead']}</p><div class="bar" aria-hidden="true"></div>
 
-<h2>What changes, in one minute</h2>
+<h2 id="changes">What changes, in one minute</h2>
 <ol class="changes">{"".join(f"<li><b>{t}</b>{d}</li>" for t, d in S["changes"])}</ol>
 
-<h2>What stays the same</h2>
+<h2 id="same">What stays the same</h2>
 <ul class="plain">{"".join(f"<li>{x}</li>" for x in S["same"])}</ul>
 
-<h2>What we'd like from you</h2>
+<h2 id="ask">What we'd like from you</h2>
 <div class="ask"><p>A short reply to the email is plenty. These are the questions we most need answered:</p>
 <ol>{"".join(f"<li>{x}</li>" for x in S["ask"])}</ol></div>
 
-<h2>See exactly what students would see</h2>
+<h2 id="how">See exactly what students would see</h2>
 <ul class="how">
 <li><b>1. Start with “What changes.”</b> Each tile shows before and after. Click a tile to see why.</li>
 <li><b>2. Click through the tabs.</b> Every tab is the real student page: the announcement, the LAB folder, Lab 0, each lab.</li>
@@ -150,7 +182,7 @@ def lang_page(key, S):
 </ul>
 <p class="hint">Works best on a laptop or desktop. Dates in the previews are this semester's, as an example.</p>
 <div class="cards" style="margin-top:18px">{cards}</div>"""
-    return page(S["title"], body, S["lead"])
+    return page(S["title"], body, S["lead"], lang_rail(S))
 
 def index_page():
     body = """<p class="kicker">UNG Language Lab</p>
@@ -164,8 +196,10 @@ def index_page():
 
 def main():
     if "--no-rebuild" not in sys.argv:
-        for code, (src, _) in COURSES.items():
-            env = dict(os.environ, LABS_COURSE=str(LABS / src / "source"), PROPOSAL_NO_LATE="1")
+        for code, (src, site) in COURSES.items():
+            sibs = [c for c, (_, st) in COURSES.items() if st == site]
+            nav = [["Summary", "./", False]] + [[c[:4].upper() + " " + c[4:], f"{c}.html", c == code] for c in sibs]
+            env = dict(os.environ, LABS_COURSE=str(LABS / src / "source"), PROPOSAL_NO_LATE="1", PROPOSAL_NAV=json.dumps(nav))
             subprocess.run([sys.executable, "make_proposal.py"], cwd=ENGINE, env=env, check=True)
     for code, (src, site) in COURSES.items():
         (HERE / site).mkdir(exist_ok=True)

@@ -38,23 +38,41 @@ ul.plain{margin:0;padding-left:20px;} ul.plain li{margin:0 0 6px;}
 footer{margin-top:48px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);padding-top:16px;}
 a{color:var(--blue);}
 @media (max-width:760px){.cards,ol.changes,.how{grid-template-columns:minmax(0,1fr);}}
+/* console shell (2026-11-10), same as the proposals */
+.shell{display:grid;grid-template-columns:252px minmax(0,1fr);min-height:100vh;}
+.rail{background:var(--card);border-right:1px solid var(--line);padding:20px 12px;display:flex;flex-direction:column;gap:14px;position:sticky;top:0;height:100vh;overflow:auto;}
+.brand{padding:0 8px;} .brand small{display:block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+.brand b{display:block;font:900 1.55rem/1.15 'Fraunces',Georgia,serif;color:var(--navy);margin:2px 0 0;} .brand span{display:block;font-size:.9rem;color:var(--muted);}
+.coursenav{display:flex;flex-wrap:wrap;gap:4px;padding:0 8px;}
+.coursenav a{font-size:.85rem;font-weight:700;text-decoration:none;color:var(--navy);border:1px solid var(--line);border-radius:999px;padding:3px 10px;}
+.coursenav a[aria-current="page"]{background:var(--navy);border-color:var(--navy);color:var(--bg);}
+.rail .grp{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:12px 8px 4px;}
+.rail .item{display:block;padding:7px 10px;border-radius:8px;text-decoration:none;color:var(--ink);font-size:.97rem;line-height:1.3;}
+.rail .item span{display:block;font-size:.82rem;color:var(--muted);} .rail .item:hover{background:var(--chip);}
+.rail-foot{margin-top:auto;padding:0 8px;font-size:.82rem;line-height:1.45;color:var(--muted);}
+.pmain{padding:26px clamp(16px,3vw,44px) 56px;min-width:0;} .pmain h2{scroll-margin-top:16px;} .pmain h2:first-of-type{margin-top:32px;}
+.pmain .cards{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));} .pmain ol.changes{grid-template-columns:repeat(auto-fill,minmax(340px,1fr));}
+@media (max-width:820px){.shell{grid-template-columns:minmax(0,1fr);} .rail{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);} .rail nav[aria-label="On this page"],.rail-foot{display:none;} .pmain{padding:18px 16px 48px;}}
 </style></head>
-<body><main>
-<p class="kicker">UNG Language Lab · Proposal for French faculty</p>
+<body>
+<div class="shell"><aside class="rail"><div class="brand"><small>Language Lab proposal</small><b>French</b><span>For French faculty</span></div>
+<nav class="coursenav" aria-label="Pages in this proposal"><a href="./" aria-current="page">Summary</a><a href="fren1001.html">FREN 1001</a><a href="fren1002.html">FREN 1002</a></nav>
+<nav aria-label="On this page"><div class="grp">Summary</div><a class="item" href="#changes">What changes</a><a class="item" href="#same">What stays the same</a><a class="item" href="#ask">What we'd like from you</a><a class="item" href="#how">How to review</a><div class="grp">Full proposals</div><a class="item" href="fren1001.html">FREN 1001 <span>Elementary French I</span></a><a class="item" href="fren1002.html">FREN 1002 <span>Elementary French II</span></a></nav>
+<p class="rail-foot">A proposal for faculty review: nothing changes in your course until it's agreed.</p></aside><div class="pmain"><p class="kicker">UNG Language Lab · Proposal for French faculty</p>
 <h1>Language Lab proposal: FREN 1001 and FREN 1002</h1>
 <p class="lead">The French labs keep their content and platforms (Bongo for FREN 1001, TalkAbroad for FREN 1002). What changes is how students find the instructions, a setup check in week one, and a set of fixes where the current pages disagree with each other.</p><div class="bar" aria-hidden="true"></div>
 
-<h2>What changes, in one minute</h2>
+<h2 id="changes">What changes, in one minute</h2>
 <ol class="changes"><li><b>One LAB folder</b>One folder per course with a tabbed description, so the rules, labs, accents and contact are in one place.</li><li><b>Lab 0 in week one</b>A Guidelines Quiz that unlocks the labs. FREN 1001 adds a one-minute Bongo camera and screen check; FREN 1002 adds TalkAbroad setup. Both 0%.</li><li><b>Typing French</b>A keyboard demo for Windows and Mac, with typing practice and three typed accent questions in the quiz.</li><li><b>FREN 1001: requirements in plain sight</b>On each Bongo page, always visible and with counts, instead of hidden in drop-downs. Lab 4 and Lab 5 work for Gainesville, Dahlonega or the student's own town.</li><li><b>FREN 1001 Lab 6: 10 recorded questions</b>A Bongo Question &amp; Answer with 10 questions recorded by a French professor, 2–3 minutes in all, in place of picking 5 of 47.</li><li><b>FREN 1002: vocabulary from Top Hat</b>Lists rebuilt from the Top Hat chapter lists, with 18 Top Hat errors corrected and listed for you to confirm. Each word links to Forvo for audio.</li><li><b>FREN 1002: due Fridays at 5:00 PM</b>Was 3:00 PM; now the same time as SPAN 1001 and SPAN 1002.</li><li><b>FREN 1002: workshops in person or online</b>Lab assistants run every workshop. Online sections get online workshops, so Gainesville and Dahlonega can share lab assistants.</li><li><b>Consistent pages</b>Fixes where pages disagreed: video length, points (FREN 1001: 20, scored with the rubric), resources, Lab 5's title and grading in FREN 1002.</li></ol>
 
-<h2>What stays the same</h2>
+<h2 id="same">What stays the same</h2>
 <ul class="plain"><li>FREN 1001: six labs, individual Bongo videos, no mini-quizzes, the five-row rubric, due Wednesdays at 11:59 PM.</li><li>FREN 1002: TalkAbroad conversations with a preparation document and an mp3, the TalkAbroad rubric (25 points per lab).</li><li>FREN 1002 summer sections: due Wednesdays at 11:59 PM.</li></ul>
 
-<h2>What we'd like from you</h2>
+<h2 id="ask">What we'd like from you</h2>
 <div class="ask"><p>A short reply to the email is plenty. These are the questions we most need answered:</p>
 <ol><li>FREN 1001 Lab 6: is the 10-question Bongo Question &amp; Answer all right?</li><li>FREN 1002 Top Hat corrections: could you confirm them? They're listed by chapter in the <b>Top Hat corrections</b> tab.</li><li>FREN 1002 summer: should summer sections add workshops, or stay without them?</li><li>Due times: FREN 1001 stays Wednesday 11:59 PM and FREN 1002 moves to Friday 5:00 PM. Keep them different, or align them?</li><li>When you copy your course next semester, could you leave the lab items out? The steps are in the <b>Course copy</b> tab.</li></ol></div>
 
-<h2>See exactly what students would see</h2>
+<h2 id="how">See exactly what students would see</h2>
 <ul class="how">
 <li><b>1. Start with “What changes.”</b> Each tile shows before and after. Click a tile to see why.</li>
 <li><b>2. Click through the tabs.</b> Every tab is the real student page: the announcement, the LAB folder, Lab 0, each lab.</li>
@@ -63,6 +81,5 @@ a{color:var(--blue);}
 <p class="hint">Works best on a laptop or desktop. Dates in the previews are this semester's, as an example.</p>
 <div class="cards" style="margin-top:18px"><article class="card"><h3>FREN 1001</h3><p class="sub">Elementary French I</p><p>Six labs in Bongo. New Lab 0, clearer Labs 4–5, and a recorded-question Lab 6.</p>
 <a class="btn" href="fren1001.html">Open the FREN 1001 proposal</a></article><article class="card"><h3>FREN 1002</h3><p class="sub">Elementary French II</p><p>Five TalkAbroad labs with workshops. New vocabulary lists and an optional reflection page.</p>
-<a class="btn" href="fren1002.html">Open the FREN 1002 proposal</a></article></div>
-<footer>UNG Language Lab · Questions: reply to the email this link came in, or write to <a href="mailto:languagelab-gvl@ung.edu">languagelab-gvl@ung.edu</a>. This is a proposal: nothing changes in your course until it's agreed.</footer>
-</main></body></html>
+<a class="btn" href="fren1002.html">Open the FREN 1002 proposal</a></article></div><footer>UNG Language Lab · Questions: reply to the email this link came in, or write to <a href="mailto:languagelab-gvl@ung.edu">languagelab-gvl@ung.edu</a>. This is a proposal: nothing changes in your course until it's agreed.</footer></div></div>
+</body></html>
