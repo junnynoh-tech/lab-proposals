@@ -180,7 +180,7 @@ def lang_page(key, S):
     top = banner(f'{S["lang"]} · <span class="c">Language Lab</span>', f"Proposal for {S['lang']} faculty", S["lang"], nav)
     rail = ('<div class="grp">On this page</div>' + "".join(f'<a class="item" href="#{i}">{t}</a>' for i, t in SECTIONS) +
             '<div class="grp">Full proposals</div>' + "".join(f'<a class="item" href="{c}.html">{e(l)}<span>{e(n)}</span></a>' for c, l, n, _ in S["cards"]) +
-            '<p class="rail-foot">A proposal for faculty review: nothing changes in your course until it&#8217;s agreed.<br>Questions: reply to the email, or write to <a href="mailto:languagelab-gvl@ung.edu">languagelab-gvl@ung.edu</a>.</p>')
+            '<p class="rail-foot">A proposal for faculty review: nothing changes in your course until it&#8217;s agreed.<br>Questions: reply to the email, or write to <a href="mailto:languagelab-gvl@ung.edu" style="white-space:nowrap">languagelab-gvl@ung.edu</a>.</p>')
     cards = "".join(f"""<article class="card"><h3>{code_l}</h3><p class="sub">{e(name)}</p><p>{blurb}</p>
 <a class="btn" href="{code}.html">Open the {code_l} proposal</a></article>""" for code, code_l, name, blurb in S["cards"])
     go = "".join(f'<a class="btn{" ghost" if i else ""}" href="{c}.html">Open the {e(l)} proposal</a>' for i, (c, l, _, _) in enumerate(S["cards"]))
