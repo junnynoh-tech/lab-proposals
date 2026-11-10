@@ -77,12 +77,10 @@ SITES = {
 
 CSS = """
 :root{--navy:#002147;--blue:#005fa3;--gold:#7a5d14;--gold-bar:#b8952a;--ink:#0d1525;--muted:#4a5f75;--bg:#f7f9fc;--card:#fff;--line:#d5e0ee;--chip:#fdf6e3;}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--navy:#cfe0f5;--blue:#8cc4f2;--gold:#e2c26a;--gold-bar:#b8952a;--ink:#e6ecf4;--muted:#a9b7c8;--bg:#0f1724;--card:#17223a;--line:#2b3a55;--chip:#2a2414;}}
-:root[data-theme="dark"]{--navy:#cfe0f5;--blue:#8cc4f2;--gold:#e2c26a;--gold-bar:#b8952a;--ink:#e6ecf4;--muted:#a9b7c8;--bg:#0f1724;--card:#17223a;--line:#2b3a55;--chip:#2a2414;}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 1.02rem/1.6 'DM Sans',system-ui,sans-serif;}
 main{max-width:980px;margin:0 auto;padding:40px 16px 64px;}
-.kicker{font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 6px;}
+.kicker{font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 6px;}
 h1{font-family:'Fraunces',Georgia,serif;font-weight:900;color:var(--navy);font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.15;margin:0 0 12px;}
 h2{font-family:'Fraunces',Georgia,serif;font-weight:700;color:var(--navy);font-size:1.45rem;margin:44px 0 14px;}
 .lead{font-size:1.15rem;color:var(--muted);max-width:760px;margin:0;}
@@ -110,28 +108,49 @@ ul.plain{margin:0;padding-left:20px;} ul.plain li{margin:0 0 6px;}
 footer{margin-top:48px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);padding-top:16px;}
 a{color:var(--blue);}
 @media (max-width:760px){.cards,ol.changes,.how{grid-template-columns:minmax(0,1fr);}}
-/* console shell (2026-11-10), same as the proposals */
-.shell{display:grid;grid-template-columns:252px minmax(0,1fr);min-height:100vh;}
-.rail{background:var(--card);border-right:1px solid var(--line);padding:20px 12px;display:flex;flex-direction:column;gap:14px;position:sticky;top:0;height:100vh;overflow:auto;}
-.brand{padding:0 8px;} .brand small{display:block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
-.brand b{display:block;font:900 1.55rem/1.15 'Fraunces',Georgia,serif;color:var(--navy);margin:2px 0 0;} .brand span{display:block;font-size:.9rem;color:var(--muted);}
-.coursenav{display:flex;flex-wrap:wrap;gap:4px;padding:0 8px;}
-.coursenav a{font-size:.85rem;font-weight:700;text-decoration:none;color:var(--navy);border:1px solid var(--line);border-radius:999px;padding:3px 10px;}
-.coursenav a[aria-current="page"]{background:var(--navy);border-color:var(--navy);color:var(--bg);}
-.rail .grp{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:12px 8px 4px;}
-.rail .item{display:block;padding:7px 10px;border-radius:8px;text-decoration:none;color:var(--ink);font-size:.97rem;line-height:1.3;}
-.rail .item span{display:block;font-size:.82rem;color:var(--muted);} .rail .item:hover{background:var(--chip);}
-.rail-foot{margin-top:auto;padding:0 8px;font-size:.82rem;line-height:1.45;color:var(--muted);}
-.pmain{padding:26px clamp(16px,3vw,44px) 56px;min-width:0;} .pmain h2{scroll-margin-top:16px;} .pmain h2:first-of-type{margin-top:32px;}
-.pmain .cards{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));} .pmain ol.changes{grid-template-columns:repeat(auto-fill,minmax(340px,1fr));}
-@media (max-width:820px){.shell{grid-template-columns:minmax(0,1fr);} .rail{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);} .rail nav[aria-label="On this page"],.rail-foot{display:none;} .pmain{padding:18px 16px 48px;}}
+/* console (2026-11-10): the proposals' banner, flag and rail (lab-builder/build.py console + make_proposal.py) */
+main{max-width:none;margin:0;padding:0;}
+header.top{background:var(--navy);color:#fff;padding:14px 24px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+.flag{display:flex;flex-direction:column;gap:3px;flex-shrink:0;} .flag i{display:block;width:34px;height:5px;border-radius:2px;}
+.top h1{font:900 1.65rem/1.15 'Fraunces',Georgia,serif;margin:0;color:#fff;} .top h1 .c{color:#9cc9ee;}
+.top p{margin:2px 0 0;font-size:.95rem;color:#d6e2f0;}
+.coursenav{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;}
+.coursenav a{color:#fff;text-decoration:none;font-weight:700;font-size:.92rem;padding:5px 14px;border:2px solid rgba(255,255,255,.55);border-radius:999px;}
+.coursenav a:hover,.coursenav a:focus-visible{border-color:#fff;}
+.coursenav a[aria-current="page"]{background:#fff;color:var(--navy);border-color:#fff;}
+.layout{display:grid;grid-template-columns:248px minmax(0,1fr);align-items:stretch;}
+.side{background:var(--card);border-right:1px solid var(--line);padding:18px 12px 24px;}
+.side .stick{position:sticky;top:12px;}
+.grp{font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 10px 4px;} .grp:first-child{margin-top:0;}
+.item{display:block;padding:8px 10px;border-radius:8px;text-decoration:none;color:var(--ink);font-weight:600;font-size:.97rem;line-height:1.3;}
+.item span{display:block;font-size:.8rem;font-weight:400;color:var(--muted);}
+.item:hover{background:#eef2f7;} .item[aria-current="true"]{background:var(--navy);color:#fff;} .item[aria-current="true"] span{color:#d6e2f0;}
+.rail-foot{margin:22px 10px 0;padding-top:14px;border-top:1px solid var(--line);font-size:.84rem;line-height:1.45;color:var(--muted);}
+.content{padding:26px clamp(16px,3vw,44px) 56px;min-width:0;}
+.content h1{font-size:clamp(1.6rem,2.4vw,2rem);margin:0 0 8px;}
+.content .lead{font-size:1.05rem;max-width:80ch;}
+.content h2{scroll-margin-top:16px;margin:36px 0 12px;}
+.go{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0;} .go .btn{margin:0;}
+.btn.ghost{background:var(--card);color:var(--navy);border:1.5px solid var(--navy);} .btn.ghost:hover{background:#eef2f7;}
+.content .cards{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));}
+.content ol.changes{grid-template-columns:repeat(auto-fill,minmax(340px,1fr));}
+.content footer{margin-top:40px;}
+@media (max-width:820px){
+ header.top{padding:12px 16px;gap:12px;} .top h1{font-size:1.35rem;} .coursenav{margin-left:0;width:100%;} .coursenav a{flex:1;text-align:center;}
+ .layout{grid-template-columns:minmax(0,1fr);} .side{display:none;} .content{padding:18px 16px 48px;}
+ .content ol.changes{grid-template-columns:minmax(0,1fr);}
+}
 """
 
-def page(title, body, desc, rail=""):
-    if rail:
-        body = f'<div class="shell"><aside class="rail">{rail}</aside><div class="pmain">{body}' + FOOT + "</div></div>"
-    else:
-        body = f"<main>{body}{FOOT}</main>"
+FLAGS = {"Spanish": ("#c8102e", "#b8952a", "#c8102e"), "French": ("#0055a4", "#ffffff", "#ef4135")}
+
+def banner(title_html, sub, flag=None, nav=""):
+    f = ('<span class="flag" aria-hidden="true">' + "".join(f'<i style="background:{c}"></i>' for c in FLAGS[flag]) + "</span>") if flag else ""
+    return f'<header class="top">{f}<div><h1>{title_html}</h1><p>{sub}</p></div>{nav}</header>'
+
+def page(title, top, body, desc, rail=""):
+    main = (f'<div class="layout"><nav class="side" aria-label="Summary sections"><div class="stick">{rail}</div></nav>'
+            f'<main id="main" class="content">{body}{FOOT}</main></div>') if rail else f'<main id="main" class="content">{body}{FOOT}</main>'
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(title)}</title><meta name="description" content="{e(desc)}"><meta name="robots" content="noindex">
@@ -139,30 +158,36 @@ def page(title, body, desc, rail=""):
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>{CSS}</style></head>
 <body>
-{body}
+{top}
+{main}
+<script>{SPY}</script>
 </body></html>
 """
 
 FOOT = """<footer>UNG Language Lab · Questions: reply to the email this link came in, or write to <a href="mailto:languagelab-gvl@ung.edu">languagelab-gvl@ung.edu</a>. This is a proposal: nothing changes in your course until it's agreed.</footer>"""
 
+# the rail marks the section you're reading
+SPY = r"""(function(){ var links=[].slice.call(document.querySelectorAll('.side a.item[href^="#"]')); if(!links.length||!window.IntersectionObserver) return;
+ var seen={}; var io=new IntersectionObserver(function(es){ es.forEach(function(x){ seen[x.target.id]=x.isIntersecting; });
+  var on=null; links.forEach(function(a){ if(!on&&seen[a.getAttribute('href').slice(1)]) on=a; }); if(!on) return;
+  links.forEach(function(a){ a.setAttribute('aria-current', a===on ? 'true' : 'false'); }); },{rootMargin:'0px 0px -55% 0px'});
+ links.forEach(function(a){ var t=document.getElementById(a.getAttribute('href').slice(1)); if(t) io.observe(t); }); })();"""
+
 SECTIONS = [("changes", "What changes"), ("same", "What stays the same"), ("ask", "What we'd like from you"), ("how", "How to review")]
 
-def lang_rail(S):
-    """Same rail as the proposals (lab-builder/make_proposal.py shell): brand, course switch, sections."""
-    courses = '<a href="./" aria-current="page">Summary</a>' + "".join(f'<a href="{c}.html">{e(l)}</a>' for c, l, _, _ in S["cards"])
-    secs = "".join(f'<a class="item" href="#{i}">{t}</a>' for i, t in SECTIONS)
-    props = "".join(f'<a class="item" href="{c}.html">{e(l)} <span>{e(n)}</span></a>' for c, l, n, _ in S["cards"])
-    return f"""<div class="brand"><small>Language Lab proposal</small><b>{S['lang']}</b><span>For {S['lang']} faculty</span></div>
-<nav class="coursenav" aria-label="Pages in this proposal">{courses}</nav>
-<nav aria-label="On this page"><div class="grp">Summary</div>{secs}<div class="grp">Full proposals</div>{props}</nav>
-<p class="rail-foot">A proposal for faculty review: nothing changes in your course until it's agreed.</p>"""
-
 def lang_page(key, S):
+    nav = '<nav class="coursenav" aria-label="Pages in this proposal"><a href="./" aria-current="page">Summary</a>' + "".join(f'<a href="{c}.html">{e(l)}</a>' for c, l, _, _ in S["cards"]) + "</nav>"
+    top = banner(f'{S["lang"]} · <span class="c">Language Lab</span>', f"Proposal for {S['lang']} faculty", S["lang"], nav)
+    rail = ('<div class="grp">On this page</div>' + "".join(f'<a class="item" href="#{i}">{t}</a>' for i, t in SECTIONS) +
+            '<div class="grp">Full proposals</div>' + "".join(f'<a class="item" href="{c}.html">{e(l)}<span>{e(n)}</span></a>' for c, l, n, _ in S["cards"]) +
+            '<p class="rail-foot">A proposal for faculty review: nothing changes in your course until it&#8217;s agreed.<br>Questions: reply to the email, or write to <a href="mailto:languagelab-gvl@ung.edu">languagelab-gvl@ung.edu</a>.</p>')
     cards = "".join(f"""<article class="card"><h3>{code_l}</h3><p class="sub">{e(name)}</p><p>{blurb}</p>
 <a class="btn" href="{code}.html">Open the {code_l} proposal</a></article>""" for code, code_l, name, blurb in S["cards"])
-    body = f"""<p class="kicker">UNG Language Lab · Proposal for {S['lang']} faculty</p>
+    go = "".join(f'<a class="btn{" ghost" if i else ""}" href="{c}.html">Open the {e(l)} proposal</a>' for i, (c, l, _, _) in enumerate(S["cards"]))
+    body = f"""<p class="kicker">Summary</p>
 <h1>{e(S['title'])}</h1>
-<p class="lead">{S['lead']}</p><div class="bar" aria-hidden="true"></div>
+<p class="lead">{S['lead']}</p>
+<div class="go">{go}</div>
 
 <h2 id="changes">What changes, in one minute</h2>
 <ol class="changes">{"".join(f"<li><b>{t}</b>{d}</li>" for t, d in S["changes"])}</ol>
@@ -174,28 +199,29 @@ def lang_page(key, S):
 <div class="ask"><p>A short reply to the email is plenty. These are the questions we most need answered:</p>
 <ol>{"".join(f"<li>{x}</li>" for x in S["ask"])}</ol></div>
 
-<h2 id="how">See exactly what students would see</h2>
+<h2 id="how">How to review the full proposals</h2>
 <ul class="how">
 <li><b>1. Start with “What changes.”</b> Each tile shows before and after. Click a tile to see why.</li>
-<li><b>2. Click through the tabs.</b> Every tab is the real student page: the announcement, the LAB folder, Lab 0, each lab.</li>
-<li><b>3. Use the switches.</b> Buttons at the top of a tab switch between in-person and online sections, or between labs.</li>
+<li><b>2. Use the menu on the left.</b> Everything under <i>Student pages</i> is the real page students would see: the announcement, the LAB folder, Lab 0, each lab.</li>
+<li><b>3. Use the switches.</b> The buttons above a preview switch between labs and between in-person and online sections. They stay in reach as you scroll.</li>
 </ul>
-<p class="hint">Works best on a laptop or desktop. Dates in the previews are this semester's, as an example.</p>
+<p class="hint">Works best on a laptop or desktop. Dates in the previews are this semester's, as an example. The buttons at the top switch between the summary and each course.</p>
 <div class="cards" style="margin-top:18px">{cards}</div>"""
-    return page(S["title"], body, S["lead"], lang_rail(S))
+    return page(S["title"], top, body, S["lead"], rail)
 
 def index_page():
-    body = """<p class="kicker">UNG Language Lab</p>
-<h1>Language Lab proposals</h1>
-<p class="lead">Proposed updates to the language labs, for faculty review. Pick your language.</p><div class="bar" aria-hidden="true"></div>
-<div class="cards" style="margin-top:28px">
+    top = banner('Language Lab <span class="c">proposals</span>', "For faculty review")
+    body = """<p class="lead">Proposed updates to the language labs, for faculty review. Pick your language.</p>
+<div class="cards" style="margin-top:18px">
 <article class="card"><h2>Spanish</h2><p class="sub">SPAN 1001 · SPAN 1002</p><p>One LAB folder, a week-one setup check, a 5:00 PM due time and one speaking rubric.</p><a class="btn" href="spanish/">Open the Spanish proposal</a></article>
 <article class="card"><h2>French</h2><p class="sub">FREN 1001 · FREN 1002</p><p>One LAB folder, a week-one setup check, French typing help, and fixes where the pages disagreed.</p><a class="btn" href="french/">Open the French proposal</a></article>
 </div>"""
-    return page("Language Lab proposals", body, "Proposed Language Lab updates for Spanish and French faculty.")
+    return page("Language Lab proposals", top, body, "Proposed Language Lab updates for Spanish and French faculty.")
 
 def main():
     if "--no-rebuild" not in sys.argv:
+        for src, _ in COURSES.values():   # course pages the proposals embed that live outside the engine (FREN 1002 reflection page)
+            if (LABS / src / "make_reflection.py").exists(): subprocess.run([sys.executable, str(LABS / src / "make_reflection.py")], check=True)
         for code, (src, site) in COURSES.items():
             sibs = [c for c, (_, st) in COURSES.items() if st == site]
             nav = [["Summary", "./", False]] + [[c[:4].upper() + " " + c[4:], f"{c}.html", c == code] for c in sibs]
